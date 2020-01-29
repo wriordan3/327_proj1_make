@@ -1,8 +1,12 @@
-default: main.o myfunc.o
-	gcc -0 myexe main.o myfunc.o
-main: main.cpp myfunc.cpp myfunc.h
-	gcc -0 main main.cpp myfunc.cpp myfunc.h
-myfunc: myfunc.cpp myfunc.h
-	gcc -0 myfunc myfunc.cpp myfunc.h
+CC= gcc
+CFLAGS = -g -Wall
+
+default: myexe
+myexe: main.o myfunc.o
+	$(CC) $(CFLAGS) -o myexe main.o myfunc.o
+main.o: main.cpp myfunc.h
+	$(CC) $(CFLAGS) -c main.cpp
+myfunc.o: myfunc.cpp myfunc.h
+	$(CC) $(CFLAGS) -c myfunc.cpp
 clean:
 	$(RM) myexe *.o *~
